@@ -7,15 +7,41 @@ namespace Quotes
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("49 Wise Quotes That Will Inspire You to Success in Life");
-            string rootpath = @"C:\Users\opilane\samples\LOGITpe21\quotes.txt";
-            string[] datafromfile = File.ReadAllLines(rootpath);
+            string filePath = @"C:\Users\opilane\samples\LOGITpe21\quotes.txt";
+            string[] dataFromFile = File.ReadAllLines(filePath);
+            //ReadDataFromArray(dataFromFile);
+            //display heading
+            Console.WriteLine(dataFromFile[0]);
+            Console.WriteLine("How many quotes would you like to print?");
+            int userInput = Convert.ToInt32(Console.ReadLine());
+            DisplayQuotes(dataFromFile, userInput);
 
-            Random rnd = new Random();
-            int randomindex = rnd.Next(1, datafromfile.Length);
-
-            Console.WriteLine(datafromfile[randomindex]);
         }
+        private static void ReadDataFromArray(string[] someArray)
+        {
+            foreach (string line in someArray)
+            {
+                Console.WriteLine(line);
+            }
+        }
+
+
+        private static void DisplayQuotes(String[] someArray, int someNumber)
+        {
+            if(someNumber > someArray.Length - 1)
+            {
+                someNumber = someArray.Length - 1;
+            }
+            for(int i = 1; i < someNumber; i++)
+            {
+                Console.WriteLine(someArray[i]);
+            }
+        }
+
+       
+
+
+
 
     }
 }

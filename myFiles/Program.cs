@@ -1,31 +1,47 @@
 ﻿using System;
 using System.IO;
 
-namespace BlackSheep
+namespace myFiles
 {
     class Program
     {
         static void Main(string[] args)
         {
-            string filepath = @"C:\Users\opilane\samples\LOGITpe21\myFiles.txt";
-            string[] datafromfile = File.ReadAllLines(filepath);
+            CreateFilesFromMyList(ReplaceNumers(GetDataFromFile()));
+            UpdateMyFiles(ReplaceNumers(GetDataFromFile()));
+        }
 
-            for (int i = 0; i < datafromfile.Length; i++)
+        private static string[] GetDataFromFile()
+        {
+            string sourceFilePath = $@"C:\Users\opilane\samples\LOGITpe21\myFiles.txt";
+            string[] dataFromFile = File.ReadAllLines(sourceFilePath);
+            return dataFromFile;
+        }
+
+        private static string[] ReplaceNumers(string[] sourceArray)
+        {
+            for (int i = 0; i < sourceArray.Length; i++)
             {
-                datafromfile[i] = datafromfile[i].Replace('3', 'e');
-                datafromfile[i] = datafromfile[i].Replace('1', 'i');
-                datafromfile[i] = datafromfile[i].Replace('0', 'o');
-                datafromfile[i] = datafromfile[i].Replace('4', 'a');
-                
-
-
+                sourceArray[i] = sourceArray[i].Replace('4', 'a').Replace('3', 'e').Replace('0', 'o').Replace('1', 'i');
             }
-            foreach (string line in datafromfile)
+
+            return sourceArray;
+        }
+
+        private static void CreateFilesFromMyList(string[] arrayOfNames)
+        {
+            string rootPath = $@"C:\Users\opilane\samples\LOGITpe21\myFiles.txt";
+            for(int i = 0; i < arrayOfNames.Length; i++)
             {
-                Console.WriteLine(line);
+                File.Create($@"{rootPath}\{arrayOfNames[i]}.txt");
             }
-            File.WriteAllLines(filepath, datafromfile);
+        }
 
+        private static void UpdateMyFiles(string[] updatedArray)
+        {   
+            string sourceFilePath = $@"C:\Users\opilane\samples\LOGITpe21\myFiles.txt";
+            File.WriteAllLines(sourceFilePath, updatedArray);
+            
         }
     }
 }
